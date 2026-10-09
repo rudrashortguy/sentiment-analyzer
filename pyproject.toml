@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "sentiment-analyzer"
+version = "1.0.0"
+description = "Transformer-based sentiment analyzer for IMDb movie reviews"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Developer"}]
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=1.12.0",
+    "transformers>=4.20.0",
+    "datasets>=2.0.0",
+    "pandas>=1.3.0",
+    "numpy>=1.21.0",
+    "scikit-learn>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.2.0",
+    "pytest-cov>=2.11.0",
+    "black>=21.5b2",
+]
+
+[project.scripts]
+sentiment-analyzer = "sentiment_analyzer.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sentiment_analyzer*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.coverage.run]
+source = ["sentiment_analyzer"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+]
